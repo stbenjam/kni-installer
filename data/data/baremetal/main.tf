@@ -25,6 +25,5 @@ module "masters" {
   image_checksum = "${var.master_configuration["image_checksum"]}"
   root_gb        = "${var.master_configuration["root_gb"]}"
   root_disk      = "${var.master_configuration["root_disk"]}"
-
-  ports = "${var.ports}"
+  nodes          = "${var.nodes}"
 }
