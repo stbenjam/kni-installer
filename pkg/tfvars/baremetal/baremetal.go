@@ -9,21 +9,23 @@ import (
 )
 
 type config struct {
-	URI             string `json:"libvirt_uri,omitempty"`
+	LibvirtURI      string `json:"libvirt_uri,omitempty"`
+	IronicURI 		string `json:"ironic_uri,omitempty"`
 	Image           string `json:"os_image,omitempty"`
 	BareMetalBridge string `json:"baremetal_bridge,omitempty"`
 	OverCloudBridge string `json:"overcloud_bridge,omitempty"`
 }
 
 // TFVars generates bare metal specific Terraform variables.
-func TFVars(libvirtURI, osImage, baremetalBridge, overcloudBridge string) ([]byte, error) {
+func TFVars(libvirtURI, ironicURI, osImage, baremetalBridge, overcloudBridge string) ([]byte, error) {
 	osImage, err := libvirttfvars.CachedImage(osImage)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to use cached libvirt image")
 	}
 
 	cfg := &config{
-		URI:             libvirtURI,
+		LibvirtURI:      libvirtURI,
+		IronicURI:       ironicURI,
 		Image:           osImage,
 		BareMetalBridge: baremetalBridge,
 		OverCloudBridge: overcloudBridge,

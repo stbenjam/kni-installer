@@ -11,23 +11,38 @@ import (
 
 // Platform collects bare metal specific configuration.
 func Platform() (*baremetal.Platform, error) {
-	var uri string
+	var libvirtURI, ironicURI string
 	err := survey.Ask([]*survey.Question{
 		{
 			Prompt: &survey.Input{
 				Message: "Libvirt Connection URI",
 				Help:    "The libvirt connection URI to be used.",
-				Default: baremetaldefaults.DefaultURI,
+				Default: baremetaldefaults.LibvirtURI,
 			},
 			Validate: survey.ComposeValidators(survey.Required, uriValidator),
 		},
-	}, &uri)
+	}, &libvirtURI)
+	if err != nil {
+		return nil, err
+	}
+
+	err = survey.Ask([]*survey.Question{
+		{
+			Prompt: &survey.Input{
+				Message: "Ironic Connection URI",
+				Help:    "The ironic connection URI to be used.",
+				Default: baremetaldefaults.IronicURI,
+			},
+			Validate: survey.ComposeValidators(survey.Required, uriValidator),
+		},
+	}, &libvirtURI)
 	if err != nil {
 		return nil, err
 	}
 
 	return &baremetal.Platform{
-		URI: uri,
+		LibvirtURI: libvirtURI,
+		IronicURI: ironicURI,
 	}, nil
 }
 

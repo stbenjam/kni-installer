@@ -2,6 +2,11 @@ provider "libvirt" {
   uri = "${var.libvirt_uri}"
 }
 
+provider "ironic" {
+  url = "${var.ironic_uri}"
+  microversion = "1.50"
+}
+
 module "bootstrap" {
   source = "./bootstrap"
 
@@ -10,4 +15,8 @@ module "bootstrap" {
   ignition         = "${var.ignition_bootstrap}"
   baremetal_bridge = "${var.baremetal_bridge}"
   overcloud_bridge = "${var.overcloud_bridge}"
+}
+
+module "masters" {
+  source = "./masters"
 }
