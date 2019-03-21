@@ -168,7 +168,9 @@ func (t *TerraformVariables) Generate(parents asset.Parents) error {
 			string(*rhcosImage),
 			"baremetal",
 			"provisioning",
-			installConfig.Config.Platform.BareMetal.Nodes)
+			installConfig.Config.Platform.BareMetal.Nodes,
+			installConfig.Config.Platform.BareMetal.MasterConfiguration,
+			)
 		if err != nil {
 			return errors.Wrapf(err, "failed to get %s Terraform variables", platform)
 		}
