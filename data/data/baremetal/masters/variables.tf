@@ -9,12 +9,12 @@ variable "image_checksum" {
 }
 
 variable "root_gb" {
-  type        =  "string"
+  type        = "string"
   description = "Size of the root disk"
 }
 
 variable "root_disk" {
-  type        =  "string"
+  type        = "string"
   description = "Location of the root disk"
 }
 
@@ -25,5 +25,5 @@ variable "ignition" {
 
 variable "nodes" {
   type        = "map"
-  description = "Baremetal nodes information"
+  description = "Bare metal node provisioning information"
 }

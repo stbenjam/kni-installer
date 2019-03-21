@@ -17,12 +17,12 @@ type config struct {
 	OverCloudBridge string `json:"overcloud_bridge,omitempty"`
 
 	// Data required for masters deployment
-	Nodes               []map[string]interface{}      `json:"nodes,omitempty"`
+	Nodes               map[string]interface{}      `json:"nodes,omitempty"`
 	MasterConfiguration baremetal.MasterConfiguration `json:"master_configuration"`
 }
 
 // TFVars generates bare metal specific Terraform variables.
-func TFVars(libvirtURI, ironicURI, osImage, baremetalBridge, overcloudBridge string, nodes []map[string]interface{}, configuration baremetal.MasterConfiguration) ([]byte, error) {
+func TFVars(libvirtURI, ironicURI, osImage, baremetalBridge, overcloudBridge string, nodes map[string]interface{}, configuration baremetal.MasterConfiguration) ([]byte, error) {
 	osImage, err := libvirttfvars.CachedImage(osImage)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to use cached libvirt image")

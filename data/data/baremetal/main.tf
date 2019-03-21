@@ -3,7 +3,7 @@ provider "libvirt" {
 }
 
 provider "ironic" {
-  url = "${var.ironic_uri}"
+  url          = "${var.ironic_uri}"
   microversion = "1.50"
 }
 
@@ -18,13 +18,13 @@ module "bootstrap" {
 }
 
 module "masters" {
-  source          = "./masters"
+  source = "./masters"
 
-  ignition        = "${var.ignition_master}"
-  image_source    = "${var.master_configuration["image_source"]}"
-  image_checksum  = "${var.master_configuration["image_checksum"]}"
-  root_gb         = "${var.master_configuration["root_gb"]}"
-  root_disk       = "${var.master_configuration["root_disk"]}"
+  ignition       = "${var.ignition_master}"
+  image_source   = "${var.master_configuration["image_source"]}"
+  image_checksum = "${var.master_configuration["image_checksum"]}"
+  root_gb        = "${var.master_configuration["root_gb"]}"
+  root_disk      = "${var.master_configuration["root_disk"]}"
 
-  nodes           = "${var.nodes}"
+  ports = "${var.ports}"
 }

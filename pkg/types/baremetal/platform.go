@@ -23,7 +23,7 @@ type Platform struct {
 
 	// Nodes is the information needed to create the master nodes in
 	// Ironic.
-	Nodes []map[string]interface{} `json:"nodes"`
+	Nodes map[string]interface{} `json:"nodes"`
 
 	// MasterConfiguration contains the information needed to provision
 	// a master.

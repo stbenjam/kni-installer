@@ -53,7 +53,7 @@ func Platform() (*baremetal.Platform, error) {
 		return nil, err
 	}
 
-	var nodes []map[string]interface{}
+	var nodes map[string]interface{}
 	if err = json.Unmarshal([]byte(nodesJSON), &nodes); err != nil {
 		return nil, err
 	}

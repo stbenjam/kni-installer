@@ -1,5 +1,5 @@
 variable "ironic_uri" {
-  type =  "string"
+  type        = "string"
   description = "ironic connection URI"
 }
 
@@ -24,8 +24,8 @@ variable "overcloud_bridge" {
 }
 
 variable "nodes" {
-  type        = "list"
-  description = "Baremetal node details for provisioning masters"
+  type        = "map"
+  description = "Bare metal masters deployment information"
 }
 
 variable "master_configuration" {
