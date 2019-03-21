@@ -65,7 +65,7 @@ func (c *Cluster) Generate(parents asset.Parents) (err error) {
 	if err != nil {
 		return errors.Wrap(err, "failed to create temp dir for terraform execution")
 	}
-	defer os.RemoveAll(tmpDir)
+	//defer os.RemoveAll(tmpDir)
 
 	extraArgs := []string{}
 	for _, file := range terraformVariables.Files() {
