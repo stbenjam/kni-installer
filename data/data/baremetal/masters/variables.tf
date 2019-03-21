@@ -8,6 +8,16 @@ variable "image_checksum" {
   description = "The URL or checksum value of the image"
 }
 
+variable "root_gb" {
+  type        =  "string"
+  description = "Size of the root disk"
+}
+
+variable "root_disk" {
+  type        =  "string"
+  description = "Location of the root disk"
+}
+
 variable "ignition" {
   type        = "string"
   description = "The content of the master ignition file."

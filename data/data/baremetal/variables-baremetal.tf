@@ -22,3 +22,13 @@ variable "overcloud_bridge" {
   type        = "string"
   description = "The name of the overcloud bridge"
 }
+
+variable "nodes" {
+  type        = "list(map)"
+  description = "Baremetal node details for provisioning masters"
+}
+
+variable "master_configuration" {
+  type        = "map(string)"
+  description = "Configuration information for masters such as image location"
+}

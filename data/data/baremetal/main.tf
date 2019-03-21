@@ -20,7 +20,11 @@ module "bootstrap" {
 module "masters" {
   source          = "./masters"
 
-  image           = "${var.master_image}"
-  image_checksum  = "${var.master_image_checksum}"
   ignition        = "${var.ignition_master}"
+  image_source    = "${var.master_configuration["image_source"]"
+  image_checksum  = "${var.master_configuration["image_checksum"]"
+  root_gb         = "${var.master_configuration["root_gb"]"
+  root_disk       = "${var.master_configuration["root_disk"]"
+
+  nodes           = "${var.nodes}"
 }
