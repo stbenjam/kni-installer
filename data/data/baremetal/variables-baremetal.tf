@@ -24,11 +24,11 @@ variable "overcloud_bridge" {
 }
 
 variable "nodes" {
-  type        = "list(map)"
+  type        = "list"
   description = "Baremetal node details for provisioning masters"
 }
 
 variable "master_configuration" {
-  type        = "map(string)"
+  type        = "map"
   description = "Configuration information for masters such as image location"
 }

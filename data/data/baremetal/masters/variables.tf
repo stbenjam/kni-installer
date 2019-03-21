@@ -1,4 +1,4 @@
-variable "image" {
+variable "image_source" {
   description = "The URL of the OS disk image"
   type        = "string"
 }
@@ -21,4 +21,9 @@ variable "root_disk" {
 variable "ignition" {
   type        = "string"
   description = "The content of the master ignition file."
+}
+
+variable "nodes" {
+  type        = "map"
+  description = "Baremetal nodes information"
 }
