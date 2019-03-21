@@ -1,3 +1,8 @@
+variable "ironic_uri" {
+  type        = "string"
+  description = "ironic connection URI"
+}
+
 variable "libvirt_uri" {
   type        = "string"
   description = "libvirt connection URI"
@@ -16,4 +21,14 @@ variable "baremetal_bridge" {
 variable "overcloud_bridge" {
   type        = "string"
   description = "The name of the overcloud bridge"
+}
+
+variable "nodes" {
+  type        = "map"
+  description = "Bare metal masters deployment information"
+}
+
+variable "master_configuration" {
+  type        = "map"
+  description = "Configuration information for masters such as image location"
 }

@@ -8,7 +8,7 @@ See the top-level [README file](../../README.md).
 
 Forking is painful, but ...
 
-- Bare metal provisioning support will be implemented as a platform in
+- Bare metal provisioning support is implemented as a platform in
   openshift-install, so openshift-install will become the interface
   that anything else (especially facet) will be built on. kni-install
   allows to prototype - and build against - that interface, and avoid
@@ -21,6 +21,22 @@ Forking is painful, but ...
   openshift/installer, it's quite beneficial for us to be working in
   that codebase from the start.
 
+## What's done?
+
+### Launching bootstrap node
+
+The bootstrap node is launched via the libvirt terraform provider.
+
+### Provisioning Master Nodes
+
+Master nodes are deployed with Ironic using [a terraform provider](https://github.com/metalkube/terraform-provider-ironic),
+so the baremetal platform works the same as the cloud-based providers. Users
+need to provide a blob of structured data containing the IPMI credentials.
+
+We could potentially switch to using the baremetal-operator, but would
+all other platforms have to switch from terraform at the same time, or
+could it be bare metal specific initially?
+
 ## What's next?
 
 ### Bootstrap Ignition Customizations
@@ -28,23 +44,12 @@ Forking is painful, but ...
 We need to make bare metal specific bootstrap ignition customizations.
 How best to do it? With per platform directories for assets?
 
-### Provisioning Master Nodes
-
-How do we prototype the Ironic based provisioning initially? With a
-path that is completely different from the other platforms?
-
-Would we move to terraform next as something more workable in the
-medium term, since that's what other platforms do?
-
-When we would switch to using baremetal-operator? Would all other
-platforms have to switch from terraform at the same time, or could it
-be bare metal specific initially?
-
 ### Using External Ironic
 
 Users may use Ironic to discover and introspect nodes before launching
 kni-install. Does it make sense for kni-install to reuse this rather
-than re-running Ironic on the bootstrap VM.
+than re-running Ironic on the bootstrap VM? The terraform provider would
+need changes to accomodate consuming existing nodes.
 
 ## How to rebase?
 
