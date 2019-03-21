@@ -18,5 +18,9 @@ module "bootstrap" {
 }
 
 module "masters" {
-  source = "./masters"
+  source          = "./masters"
+
+  image           = "${var.master_image}"
+  image_checksum  = "${var.master_image_checksum}"
+  ignition        = "${var.ignition_master}"
 }

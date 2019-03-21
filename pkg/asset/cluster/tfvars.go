@@ -167,7 +167,8 @@ func (t *TerraformVariables) Generate(parents asset.Parents) error {
 			installConfig.Config.Platform.BareMetal.IronicURI,
 			string(*rhcosImage),
 			"baremetal",
-			"provisioning")
+			"provisioning",
+			installConfig.Config.Platform.BareMetal.Nodes)
 		if err != nil {
 			return errors.Wrapf(err, "failed to get %s Terraform variables", platform)
 		}

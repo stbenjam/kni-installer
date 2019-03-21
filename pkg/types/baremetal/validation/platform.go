@@ -18,6 +18,10 @@ func ValidatePlatform(p *baremetal.Platform, fldPath *field.Path) field.ErrorLis
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("ironic_uri"), p.LibvirtURI, err.Error()))
 	}
 
+	if p.Nodes == nil {
+		allErrs = append(allErrs, field.Invalid(fldPath.Child("nodes"), p.Nodes, "nodes is missing"))
+	}
+
 	if p.DefaultMachinePlatform != nil {
 		allErrs = append(allErrs, ValidateMachinePool(p.DefaultMachinePlatform, fldPath.Child("defaultMachinePlatform"))...)
 	}

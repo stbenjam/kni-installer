@@ -14,6 +14,10 @@ type Platform struct {
 	// +optional
 	IronicURI string `json:"ironic_uri,omitempty"`
 
+	// Nodes the information needed to create the master nodes in
+	// Ironic.
+	Nodes []map[string]interface{} `json:"nodes"`
+
 	// DefaultMachinePlatform is the default configuration used when
 	// installing on bare metal for machine pools which do not define their own
 	// platform configuration.
