@@ -1,3 +1,7 @@
+# This Terraform HCL file defines the 3 master nodes.  It uses the original ironic_nodes.json format,
+# flattened because Terraform v0.11 does not support nested data structures.  Maps may only be key/value
+# pairs.
+
 resource "ironic_node_v1" "openshift-master-0" {
   name = "${var.nodes["nodes_0_name"]}"
 
@@ -26,7 +30,7 @@ resource "ironic_node_v1" "openshift-master-0" {
   driver = "ipmi"
 
   driver_info {
-    ipmi_port      = "${var.nodes["nodes_0_driver_info_ipmi_address"]}"
+    ipmi_port      = "${var.nodes["nodes_0_driver_info_ipmi_port"]}"
     ipmi_username  = "${var.nodes["nodes_0_driver_info_ipmi_username"]}"
     ipmi_password  = "${var.nodes["nodes_0_driver_info_ipmi_password"]}"
     ipmi_address   = "${var.nodes["nodes_0_driver_info_ipmi_address"]}"
@@ -63,7 +67,7 @@ resource "ironic_node_v1" "openshift-master-1" {
   driver = "ipmi"
 
   driver_info {
-    ipmi_port      = "${var.nodes["nodes_1_driver_info_ipmi_address"]}"
+    ipmi_port      = "${var.nodes["nodes_1_driver_info_ipmi_port"]}"
     ipmi_username  = "${var.nodes["nodes_1_driver_info_ipmi_username"]}"
     ipmi_password  = "${var.nodes["nodes_1_driver_info_ipmi_password"]}"
     ipmi_address   = "${var.nodes["nodes_1_driver_info_ipmi_address"]}"
@@ -100,7 +104,7 @@ resource "ironic_node_v1" "openshift-master-2" {
   driver = "ipmi"
 
   driver_info {
-    ipmi_port      = "${var.nodes["nodes_2_driver_info_ipmi_address"]}"
+    ipmi_port      = "${var.nodes["nodes_2_driver_info_ipmi_port"]}"
     ipmi_username  = "${var.nodes["nodes_2_driver_info_ipmi_username"]}"
     ipmi_password  = "${var.nodes["nodes_2_driver_info_ipmi_password"]}"
     ipmi_address   = "${var.nodes["nodes_2_driver_info_ipmi_address"]}"
