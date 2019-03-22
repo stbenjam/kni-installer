@@ -20,7 +20,7 @@ variable "root_disk" {
 
 variable "ignition" {
   type        = "string"
-  description = "The content of the master ignition file."
+  description = "The content of the master ignition file"
 }
 
 variable "nodes" {

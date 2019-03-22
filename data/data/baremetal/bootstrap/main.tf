@@ -31,7 +31,6 @@ resource "libvirt_domain" "bootstrap" {
   }
 
   network_interface {
-    wait_for_lease = "true"
     bridge         = "${var.baremetal_bridge}"
   }
 

@@ -1,6 +1,7 @@
-# This Terraform HCL file defines the 3 master nodes.  It uses the original ironic_nodes.json format,
+# FIXME: This Terraform HCL file defines the 3 master nodes.  It uses the original ironic_nodes.json format,
 # flattened because Terraform v0.11 does not support nested data structures.  Maps may only be key/value
-# pairs.
+# pairs.  We could use terraform's resource `count` provider to have just one resource declaration, but
+# the data would have to be structured differently.
 
 resource "ironic_node_v1" "openshift-master-0" {
   name = "${var.nodes["nodes_0_name"]}"
