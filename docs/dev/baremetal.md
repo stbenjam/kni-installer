@@ -31,13 +31,40 @@ The bootstrap node is launched via the libvirt terraform provider.
 
 Master nodes are deployed with Ironic using [a terraform provider](https://github.com/metalkube/terraform-provider-ironic),
 so the baremetal platform works the same as the cloud-based providers. Users
-need to provide a blob of structured data containing the IPMI credentials.
+need to provide information about the hardware nodes.  This is currently
+provided in the format of ironic_nodes.json, which is flattened due to
+the [limitations of terraform HCL](https://blog.gruntwork.io/terraform-tips-tricks-loops-if-statements-and-gotchas-f739bbae55f9?gi=1a2b92150144), and then converted to YAML.
+
+This data is used by the Terraform templates to deploy the masters.
 
 We could potentially switch to using the baremetal-operator, but would
 all other platforms have to switch from terraform at the same time, or
 could it be bare metal specific initially?
 
 ## What's next?
+
+### How do we get hardware information?
+
+Today the installer takes a blob of data. The installer should be more
+user-friendly for working with the hardware, and operate in a more
+interactive way. One proposal would be to query Ironic for discovered
+baremetal nodes. Hardware would be powered on early and boot the Ironic
+discovery image.  This also has the benefit of reducing the number of
+reboots required during deployment and shortening deployment time.
+
+When kni-installer launches, the installer will show hardware available
+in Ironic's inventory.
+
+The user can select which three become the masters, and will be prompted
+to enter the BMC credentials for the nodes.  After ensuring the nodes
+validate successfully in Ironic, the installer will create the templated
+terraform configuration and deploy the masters.
+
+The terraform provider would need to be refactored to support this,
+either by allowing the node resource to consume an existing baremetal
+node, or by separating the hardware defintion from the concept of a
+deployment.  This is tracked by [this issue](https://github.com/openshift-metalkube/terraform-provider-ironic/issues/6).
+
 
 ### Bootstrap Ignition Customizations
 
