@@ -115,6 +115,9 @@ var (
 					logrus.Fatal(err)
 				}
 
+				logrus.Warn("FIXME! Exiting after bootstrap, remove when all operators will come up successfully.")
+				return
+
 				err = finish(ctx, config, rootOpts.dir)
 				if err != nil {
 					logrus.Fatal(err)
