@@ -282,7 +282,7 @@ func waitForBootstrapComplete(ctx context.Context, config *rest.Config, director
 		return errors.Wrap(err, "waiting for Kubernetes API")
 	}
 
-	eventTimeout := 30 * time.Minute
+	eventTimeout := 60 * time.Minute
 	logrus.Infof("Waiting up to %v for the bootstrap-complete event...", eventTimeout)
 	return waitForEvent(ctx, client.CoreV1().RESTClient(), "bootstrap-complete", eventTimeout)
 }
