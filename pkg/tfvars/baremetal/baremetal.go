@@ -16,8 +16,23 @@ type config struct {
 	BareMetalBridge string `json:"baremetal_bridge,omitempty"`
 	OverCloudBridge string `json:"overcloud_bridge,omitempty"`
 
-	// Data required for masters deployment
-	Nodes               map[string]interface{}      `json:"nodes,omitempty"`
+	// Data required for masters deployment - several maps per master, because of terraform's
+	// limitation that maps cannot be strings
+	Master0     interface{} `json:"master_0"`
+	Properties0 interface{} `json:"properties_0"`
+	RootDevice0 interface{} `json:"root_device_0"`
+	DriverInfo0 interface{} `json:"driver_info_0"`
+
+	Master1     interface{} `json:"master_1"`
+	Properties1 interface{} `json:"properties_1"`
+	RootDevice1 interface{} `json:"root_device_1"`
+	DriverInfo1 interface{} `json:"driver_info_1"`
+
+	Master2     interface{} `json:"master_2"`
+	Properties2 interface{} `json:"properties_2"`
+	RootDevice2 interface{} `json:"root_device_2"`
+	DriverInfo2 interface{} `json:"driver_info_2"`
+
 	MasterConfiguration baremetal.MasterConfiguration `json:"master_configuration"`
 }
 
@@ -34,7 +49,18 @@ func TFVars(libvirtURI, ironicURI, osImage, baremetalBridge, overcloudBridge str
 		Image:               osImage,
 		BareMetalBridge:     baremetalBridge,
 		OverCloudBridge:     overcloudBridge,
-		Nodes:               nodes,
+		Master0:             nodes["master_0"],
+		Properties0:         nodes["properties_0"],
+		RootDevice0:         nodes["root_device_0"],
+		DriverInfo0:         nodes["driver_info_0"],
+		Master1:             nodes["master_1"],
+		Properties1:         nodes["properties_1"],
+		RootDevice1:         nodes["root_device_1"],
+		DriverInfo1:         nodes["driver_info_1"],
+		Master2:             nodes["master_2"],
+		Properties2:         nodes["properties_2"],
+		RootDevice2:         nodes["root_device_2"],
+		DriverInfo2:         nodes["driver_info_2"],
 		MasterConfiguration: configuration,
 	}
 

@@ -4,112 +4,79 @@
 # the data would have to be structured differently.
 
 resource "ironic_node_v1" "openshift-master-0" {
-  name = "${var.nodes["nodes_0_name"]}"
+  name = "${var.master_0["name"]}"
 
   target_provision_state = "active"
-  user_data              = "${var.ignition}"
+  user_data = "${var.ignition}"
+  root_device = "${var.root_device_0}"
+  driver = "${var.master_0["driver"]}"
+  driver_info = "${var.driver_info_0}"
 
   ports = [
     {
-      address     = "${var.nodes["nodes_0_ports_0_address"]}"
-      pxe_enabled = "${var.nodes["nodes_0_ports_0_pxe_enabled"]}"
+      address = "${var.master_0["address"]}"
+      pxe_enabled = "true"
     },
   ]
 
-  properties {
-    local_gb = "${var.nodes["nodes_0_properties_local_gb"]}"
-    cpu_arch = "${var.nodes["nodes_0_properties_cpu_arch"]}"
-  }
+  properties = "${var.properties_0}"
 
   instance_info = {
-    image_source   = "${var.image_source}"
+    image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
-    root_gb        = "${var.root_gb}"
-    root_device    = "${var.root_disk}"
-  }
-
-  driver = "ipmi"
-
-  driver_info {
-    ipmi_port      = "${var.nodes["nodes_0_driver_info_ipmi_port"]}"
-    ipmi_username  = "${var.nodes["nodes_0_driver_info_ipmi_username"]}"
-    ipmi_password  = "${var.nodes["nodes_0_driver_info_ipmi_password"]}"
-    ipmi_address   = "${var.nodes["nodes_0_driver_info_ipmi_address"]}"
-    deploy_kernel  = "${var.nodes["nodes_0_driver_info_deploy_kernel"]}"
-    deploy_ramdisk = "${var.nodes["nodes_0_driver_info_deploy_ramdisk"]}"
+    root_gb = "${var.root_gb}"
+    root_device = "${var.root_disk}"
   }
 }
 
 resource "ironic_node_v1" "openshift-master-1" {
-  name = "${var.nodes["nodes_1_name"]}"
+  name = "${var.master_1["name"]}"
 
   target_provision_state = "active"
-  user_data              = "${var.ignition}"
+  user_data = "${var.ignition}"
+  root_device = "${var.root_device_1}"
+  driver = "${var.master_1["driver"]}"
+  driver_info = "${var.driver_info_1}"
 
   ports = [
     {
-      address     = "${var.nodes["nodes_1_ports_0_address"]}"
-      pxe_enabled = "${var.nodes["nodes_1_ports_0_pxe_enabled"]}"
+      address = "${var.master_1["address"]}"
+      pxe_enabled = "true"
     },
   ]
 
-  properties {
-    local_gb = "${var.nodes["nodes_1_properties_local_gb"]}"
-    cpu_arch = "${var.nodes["nodes_1_properties_cpu_arch"]}"
-  }
+  properties = "${var.properties_1}"
 
   instance_info = {
-    image_source   = "${var.image_source}"
+    image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
-    root_gb        = "${var.root_gb}"
-    root_device    = "${var.root_disk}"
-  }
-
-  driver = "ipmi"
-
-  driver_info {
-    ipmi_port      = "${var.nodes["nodes_1_driver_info_ipmi_port"]}"
-    ipmi_username  = "${var.nodes["nodes_1_driver_info_ipmi_username"]}"
-    ipmi_password  = "${var.nodes["nodes_1_driver_info_ipmi_password"]}"
-    ipmi_address   = "${var.nodes["nodes_1_driver_info_ipmi_address"]}"
-    deploy_kernel  = "${var.nodes["nodes_1_driver_info_deploy_kernel"]}"
-    deploy_ramdisk = "${var.nodes["nodes_1_driver_info_deploy_ramdisk"]}"
+    root_gb = "${var.root_gb}"
+    root_device = "${var.root_disk}"
   }
 }
 
 resource "ironic_node_v1" "openshift-master-2" {
-  name = "${var.nodes["nodes_2_name"]}"
+  name = "${var.master_2["name"]}"
 
   target_provision_state = "active"
-  user_data              = "${var.ignition}"
+  user_data = "${var.ignition}"
+  root_device = "${var.root_device_2}"
+  driver = "${var.master_2["driver"]}"
+  driver_info = "${var.driver_info_2}"
 
   ports = [
     {
-      address     = "${var.nodes["nodes_2_ports_0_address"]}"
-      pxe_enabled = "${var.nodes["nodes_2_ports_0_pxe_enabled"]}"
+      address = "${var.master_2["address"]}"
+      pxe_enabled = "true"
     },
   ]
 
-  properties {
-    local_gb = "${var.nodes["nodes_2_properties_local_gb"]}"
-    cpu_arch = "${var.nodes["nodes_2_properties_cpu_arch"]}"
-  }
+  properties = "${var.properties_2}"
 
   instance_info = {
-    image_source   = "${var.image_source}"
+    image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
-    root_gb        = "${var.root_gb}"
-    root_device    = "${var.root_disk}"
-  }
-
-  driver = "ipmi"
-
-  driver_info {
-    ipmi_port      = "${var.nodes["nodes_2_driver_info_ipmi_port"]}"
-    ipmi_username  = "${var.nodes["nodes_2_driver_info_ipmi_username"]}"
-    ipmi_password  = "${var.nodes["nodes_2_driver_info_ipmi_password"]}"
-    ipmi_address   = "${var.nodes["nodes_2_driver_info_ipmi_address"]}"
-    deploy_kernel  = "${var.nodes["nodes_2_driver_info_deploy_kernel"]}"
-    deploy_ramdisk = "${var.nodes["nodes_2_driver_info_deploy_ramdisk"]}"
+    root_gb = "${var.root_gb}"
+    root_device = "${var.root_disk}"
   }
 }
