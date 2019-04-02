@@ -25,8 +25,11 @@ resource "ironic_node_v1" "openshift-master-0" {
     image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
     root_gb = "${var.root_gb}"
-    root_device = "${var.root_disk}"
   }
+
+  management_interface = "${var.master_0["management_interface"]}"
+  power_interface = "${var.master_0["power_interface"]}"
+  vendor_interface = "${var.master_0["vendor_interface"]}"
 }
 
 resource "ironic_node_v1" "openshift-master-1" {
@@ -51,8 +54,11 @@ resource "ironic_node_v1" "openshift-master-1" {
     image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
     root_gb = "${var.root_gb}"
-    root_device = "${var.root_disk}"
   }
+
+  management_interface = "${var.master_1["management_interface"]}"
+  power_interface = "${var.master_1["power_interface"]}"
+  vendor_interface = "${var.master_1["vendor_interface"]}"
 }
 
 resource "ironic_node_v1" "openshift-master-2" {
@@ -77,6 +83,9 @@ resource "ironic_node_v1" "openshift-master-2" {
     image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
     root_gb = "${var.root_gb}"
-    root_device = "${var.root_disk}"
   }
+
+  management_interface = "${var.master_2["management_interface"]}"
+  power_interface = "${var.master_2["power_interface"]}"
+  vendor_interface = "${var.master_2["vendor_interface"]}"
 }
