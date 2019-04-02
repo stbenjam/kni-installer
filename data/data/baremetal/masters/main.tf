@@ -14,7 +14,7 @@ resource "ironic_node_v1" "openshift-master-0" {
 
   ports = [
     {
-      address = "${var.master_0["address"]}"
+      address = "${var.master_0["port_address"]}"
       pxe_enabled = "true"
     },
   ]
@@ -43,7 +43,7 @@ resource "ironic_node_v1" "openshift-master-1" {
 
   ports = [
     {
-      address = "${var.master_1["address"]}"
+      address = "${var.master_1["port_address"]}"
       pxe_enabled = "true"
     },
   ]
@@ -72,7 +72,7 @@ resource "ironic_node_v1" "openshift-master-2" {
 
   ports = [
     {
-      address = "${var.master_2["address"]}"
+      address = "${var.master_2["port_address"]}"
       pxe_enabled = "true"
     },
   ]
