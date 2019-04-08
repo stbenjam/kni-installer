@@ -33,6 +33,7 @@ resource "ironic_node_v1" "openshift-master-0" {
 }
 
 resource "ironic_node_v1" "openshift-master-1" {
+  count = "${var.instance_count == "2" || var.instance_count == "3" ? 1 : 0}"
   name = "${var.master_1["name"]}"
 
   target_provision_state = "active"
@@ -62,6 +63,7 @@ resource "ironic_node_v1" "openshift-master-1" {
 }
 
 resource "ironic_node_v1" "openshift-master-2" {
+  count = "${var.instance_count == "3" ? 1 : 0}"
   name = "${var.master_2["name"]}"
 
   target_provision_state = "active"

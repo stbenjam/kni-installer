@@ -21,6 +21,7 @@ module "masters" {
   source = "./masters"
 
   ignition       = "${var.ignition_master}"
+  master_count   = "${var.master_count}"
   image_source   = "${var.master_configuration["image_source"]}"
   image_checksum = "${var.master_configuration["image_checksum"]}"
   root_gb        = "${var.master_configuration["root_gb"]}"

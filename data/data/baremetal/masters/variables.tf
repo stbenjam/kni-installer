@@ -23,6 +23,11 @@ variable "ignition" {
   description = "The content of the master ignition file"
 }
 
+variable "instance_count" {
+  type = "string"
+  description = "Number of masters to deploy"
+}
+
 variable "master_0" {
   type = "map"
   description = "Master 0 bare metal node details"
