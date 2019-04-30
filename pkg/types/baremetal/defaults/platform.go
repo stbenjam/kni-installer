@@ -1,7 +1,7 @@
 package defaults
 
 import (
-	"github.com/openshift-metalkube/kni-installer/pkg/types/baremetal"
+	"github.com/openshift/installer/pkg/types/baremetal"
 )
 
 const (

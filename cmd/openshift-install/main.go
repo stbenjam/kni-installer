@@ -14,7 +14,7 @@ import (
 	"github.com/spf13/cobra"
 	"golang.org/x/crypto/ssh/terminal"
 
-	"github.com/openshift-metalkube/kni-installer/pkg/terraform/exec/plugins"
+	"github.com/openshift/installer/pkg/terraform/exec/plugins"
 )
 
 var (
@@ -61,13 +61,13 @@ func installerMain() {
 	}
 
 	if err := rootCmd.Execute(); err != nil {
-		logrus.Fatalf("Error executing kni-install: %v", err)
+		logrus.Fatalf("Error executing openshift-install: %v", err)
 	}
 }
 
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:              "kni-install",
+		Use:              "openshift-install",
 		Short:            "Creates OpenShift clusters",
 		Long:             "",
 		PersistentPreRun: runRootCmd,
