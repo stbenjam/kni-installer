@@ -28,22 +28,13 @@ variable "master_configuration" {
   description = "Configuration information for masters such as image location"
 }
 
-variable "master_nodes" {
+variable "control_plane" {
   type = "map"
-  description = "Master bare metal node details"
+  description = "Bare metal host details for the control plane"
 }
 
-variable "properties" {
+variable "workers" {
   type = "map"
-  description = "Master bare metal properties"
+  description = "Bare metal host details for the workers"
 }
 
-variable "root_devices" {
-  type = "map"
-  description = "Master root device configurations"
-}
-
-variable "driver_infos" {
-  type = "map"
-  description = "Master driver infos"
-}

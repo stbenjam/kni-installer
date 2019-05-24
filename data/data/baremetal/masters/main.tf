@@ -1,48 +1,47 @@
-resource "ironic_node_v1" "openshift-master-node" {
-  count          = "${length(keys(var.master_nodes))}"
-  name           = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "name")}"
+resource "ironic_node_v1" "control-plane-host" {
+  count = "${length(keys(var.control_plane))}"
+  name = "${lookup(var.control_plane["$count.index"], "name")}"
   resource_class = "baremetal"
 
-  inspect   = true
-  clean     = true
+  inspect = true
+  clean = true
   available = true
 
   ports = [
     {
-      address     = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "port_address")}"
+      address = "${lookup(var.control_plane["$count.index"], "port_address")}"
       pxe_enabled = "true"
     },
   ]
 
-  properties  = "${var.properties[format("openshift-master-%d", count.index)]}"
-  root_device = "${var.root_devices[format("openshift-master-%d", count.index)]}"
+  properties = "${lookup(var.control_plane["$count.index"], "properties")}"
+  root_device = "${lookup(var.control_plane["$count.index"], "root_device")}"
 
-  driver      = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "driver")}"
-  driver_info = "${var.driver_infos[format("openshift-master-%d", count.index)]}"
+  driver = "${lookup(var.control_plane["$count.index"], "driver")}"
+  driver_info = "${lookup(var.control_plane["$count.index"], "driver_info")}"
 
-  management_interface = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "management_interface")}"
-  power_interface      = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "power_interface")}"
-  vendor_interface     = "${lookup(var.master_nodes[format("openshift-master-%d", count.index)], "vendor_interface")}"
+  vendor_interface = "no-vendor"
 }
 
-resource "ironic_allocation_v1" "openshift-master-allocation" {
-  name           = "master-${count.index}"
-  count          = 3
+resource "ironic_allocation_v1" "control-plane-allocation" {
+  name = "master-${count.index}"
+  count = 3
   resource_class = "baremetal"
 
   candidate_nodes = [
-    "${ironic_node_v1.openshift-master-node.*.id}",
+    "${ironic_node_v1.control-plane-host.*.id}",
   ]
 }
 
-resource "ironic_deployment" "openshift-master-deployment" {
-  count     = 3
-  node_uuid = "${element(ironic_allocation_v1.openshift-master-allocation.*.node_uuid, count.index)}"
+resource "ironic_deployment" "control-plane-deployment" {
+  count = 3
+  node_uuid = "${element(ironic_allocation_v1.control-plane-allocation.*.node_uuid, count.index)}"
 
   instance_info = {
-    image_source   = "${var.image_source}"
+    image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
-    root_gb        = "${var.root_gb}"
+    root_gb = "${var.root_gb}"
+    address = "${lookup(var.control_plane["$count.index"], "root_gb")}"
   }
 
   user_data = "${var.ignition}"

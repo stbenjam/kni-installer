@@ -23,22 +23,12 @@ variable "ignition" {
   description = "The content of the master ignition file"
 }
 
-variable "master_nodes" {
+variable "control_plane" {
   type        = "map"
-  description = "Master bare metal node details"
+  description = "Bare metal host details for control plane"
 }
 
-variable "properties" {
+variable "workers" {
   type        = "map"
-  description = "Master bare metal properties"
-}
-
-variable "root_devices" {
-  type        = "map"
-  description = "Master root device configuration"
-}
-
-variable "driver_infos" {
-  type        = "map"
-  description = "Master driver info"
+  description = "Bare metal host details for workers"
 }

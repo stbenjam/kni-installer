@@ -2,7 +2,6 @@
 package baremetal
 
 import (
-	"encoding/json"
 	"gopkg.in/AlecAivazis/survey.v1"
 
 	"github.com/openshift-metalkube/kni-installer/pkg/types/baremetal"
@@ -12,7 +11,7 @@ import (
 
 // Platform collects bare metal specific configuration.
 func Platform() (*baremetal.Platform, error) {
-	var libvirtURI, ironicURI, externalBridge, provisioningBridge, apiVIP, nodesJSON string
+	var libvirtURI, ironicURI, externalBridge, provisioningBridge, apiVIP string
 	err := survey.Ask([]*survey.Question{
 		{
 			Prompt: &survey.Input{
@@ -72,23 +71,6 @@ func Platform() (*baremetal.Platform, error) {
 	err = survey.Ask([]*survey.Question{
 		{
 			Prompt: &survey.Input{
-				Message: "Master node definition JSON",
-				Help:    "JSON data containing information about the baremetal nodes for use by Ironic.",
-			},
-		},
-	}, &nodesJSON)
-	if err != nil {
-		return nil, err
-	}
-
-	var nodes map[string]interface{}
-	if err = json.Unmarshal([]byte(nodesJSON), &nodes); err != nil {
-		return nil, err
-	}
-
-	err = survey.Ask([]*survey.Question{
-		{
-			Prompt: &survey.Input{
 				Message: "API VIP",
 				Help:    "The VIP to be used for internal API communication.",
 			},
@@ -102,7 +84,6 @@ func Platform() (*baremetal.Platform, error) {
 	return &baremetal.Platform{
 		LibvirtURI:         libvirtURI,
 		IronicURI:          ironicURI,
-		Nodes:              nodes,
 		ApiVIP:             apiVIP,
 		ExternalBridge:     externalBridge,
 		ProvisioningBridge: provisioningBridge,

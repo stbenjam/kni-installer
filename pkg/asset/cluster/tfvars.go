@@ -179,14 +179,13 @@ func (t *TerraformVariables) Generate(parents asset.Parents) error {
 			Data:     data,
 		})
 	case baremetal.Name:
-		// FIXME:: baremetal
 		data, err = baremetaltfvars.TFVars(
 			installConfig.Config.Platform.BareMetal.LibvirtURI,
 			installConfig.Config.Platform.BareMetal.IronicURI,
 			string(*rhcosImage),
 			"baremetal",
 			"provisioning",
-			installConfig.Config.Platform.BareMetal.Nodes,
+			&installConfig.Config.Platform.BareMetal.Hosts,
 			installConfig.Config.Platform.BareMetal.MasterConfiguration,
 			)
 		if err != nil {

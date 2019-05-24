@@ -26,8 +26,6 @@ module "masters" {
   root_gb        = "${var.master_configuration["root_gb"]}"
   root_disk      = "${var.master_configuration["root_disk"]}"
 
-  master_nodes = "${var.master_nodes}"
-  properties   = "${var.properties}"
-  root_devices = "${var.root_devices}"
-  driver_infos = "${var.driver_infos}"
+  control_plane  = "${var.control_plane}"
+  workers        = "${var.workers}"
 }
