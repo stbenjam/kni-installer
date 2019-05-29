@@ -20,6 +20,10 @@ type config struct {
 	ControlPlane []map[string]interface{} `hcl:"control_plane"`
 	Workers      []map[string]interface{} `hcl:"workers"`
 
+	RootDevice  []map[string]interface{} `hcl:"root_device"`
+	Properties  []map[string]interface{} `hcl:"properties"`
+	DriverInfos []map[string]interface{} `hcl:"driver_infos"`
+
 	MasterConfiguration map[string]interface{} `hcl:"master_configuration"`
 }
 
