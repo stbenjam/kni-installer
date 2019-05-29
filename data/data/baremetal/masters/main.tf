@@ -1,6 +1,6 @@
 resource "ironic_node_v1" "control-plane-host" {
   count = "${length(var.control_plane)}"
-  name = "${element(var.control_plane.*.name, count.index)}"
+  name = "${var.control_plane[count.index]["name"]}"
   resource_class = "baremetal"
 
   inspect = true
@@ -9,16 +9,16 @@ resource "ironic_node_v1" "control-plane-host" {
 
   ports = [
     {
-      address = "${element(var.control_plane.*.port_address, count.index)}"
+      address = "${var.control_plane[count.index]["port_address"]}"
       pxe_enabled = "true"
     },
   ]
 
-  properties = "${element(var.control_plane.*.properties, count.index)}"
-  root_device = "${element(var.control_plane.*.root_device, count.index)}"
+  properties = "${var.control_plane[count.index]["properties"]}"
+  root_device = "${var.control_plane[count.index]["root_device"]}"
 
-  driver = "${element(var.control_plane.*.driver, count.index)}"
-  driver_info = "${element(var.control_plane.*.driver_info, count.index)}"
+  driver = "${var.control_plane[count.index]["driver"]}"
+  driver_info = "${var.control_plane[count.index]["driver_info"]}"
 
   vendor_interface = "no-vendor"
 }
@@ -41,7 +41,7 @@ resource "ironic_deployment" "control-plane-deployment" {
     image_source = "${var.image_source}"
     image_checksum = "${var.image_checksum}"
     root_gb = "${var.root_gb}"
-    address = "${element(var.control_plane.*.root_gb, count.index)}"
+    address = "${var.control_plane[count.index]["root_gb"]}"
   }
 
   user_data = "${var.ignition}"
