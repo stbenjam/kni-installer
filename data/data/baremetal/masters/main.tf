@@ -1,5 +1,5 @@
 resource "ironic_node_v1" "control-plane-host" {
-  count = "${length(keys(var.control_plane))}"
+  count = "${length(var.control_plane)}"
   name = "${lookup(var.control_plane["$count.index"], "name")}"
   resource_class = "baremetal"
 
