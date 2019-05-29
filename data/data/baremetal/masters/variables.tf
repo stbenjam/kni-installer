@@ -24,11 +24,11 @@ variable "ignition" {
 }
 
 variable "control_plane" {
-  type        = "map"
+  type        = "list"
   description = "Bare metal host details for control plane"
 }
 
 variable "workers" {
-  type        = "map"
+  type        = "list"
   description = "Bare metal host details for workers"
 }
