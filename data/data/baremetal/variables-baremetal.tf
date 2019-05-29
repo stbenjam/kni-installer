@@ -36,5 +36,6 @@ variable "control_plane" {
 variable "workers" {
   type = "list"
   description = "Bare metal host details for the workers"
+  default = []
 }
 
