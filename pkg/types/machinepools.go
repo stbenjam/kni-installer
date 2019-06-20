@@ -62,7 +62,7 @@ type MachinePoolPlatform struct {
 	VSphere *vsphere.MachinePool `json:"vsphere,omitempty"`
 
 	// BareMetal is the configuration used when installing on bare metal.
-	BareMetal *baremetal.MachinePool `json:"baremetal,omitempty"`
+	BareMetal *baremetal.MachinePool `json:"openstack,omitempty"`
 }
 
 // Name returns a string representation of the platform (e.g. "aws" if
