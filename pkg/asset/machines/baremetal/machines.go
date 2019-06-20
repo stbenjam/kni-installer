@@ -23,14 +23,13 @@ func Machines(clusterID string, config *types.InstallConfig, pool *types.Machine
 	if poolPlatform := pool.Platform.Name(); poolPlatform != baremetal.Name {
 		return nil, fmt.Errorf("non bare metal machine-pool: %q", poolPlatform)
 	}
-	clustername := config.ObjectMeta.Name
 	platform := config.Platform.BareMetal
 
 	total := int64(1)
 	if pool.Replicas != nil {
 		total = *pool.Replicas
 	}
-	provider := provider(clustername, config.Networking.MachineCIDR.String(), platform, userDataSecret)
+	provider := provider(clusterID, config.Networking.MachineCIDR.String(), platform, userDataSecret)
 	var machines []machineapi.Machine
 	for idx := int64(0); idx < total; idx++ {
 		machine := machineapi.Machine{
@@ -40,9 +39,9 @@ func Machines(clusterID string, config *types.InstallConfig, pool *types.Machine
 			},
 			ObjectMeta: metav1.ObjectMeta{
 				Namespace: "openshift-machine-api",
-				Name:      fmt.Sprintf("%s-%s-%d", clustername, pool.Name, idx),
+				Name:      fmt.Sprintf("%s-%s-%d", clusterID, pool.Name, idx),
 				Labels: map[string]string{
-					"machine.openshift.io/cluster-api-cluster":      clustername,
+					"machine.openshift.io/cluster-api-cluster":      clusterID,
 					"machine.openshift.io/cluster-api-machine-role": role,
 					"machine.openshift.io/cluster-api-machine-type": role,
 				},
