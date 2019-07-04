@@ -1,3 +1,5 @@
+# vim: set ft=yaml:
+
 apiVersion: clusterversion.openshift.io/v1
 kind: CVOConfig
 metadata:

@@ -1,3 +1,5 @@
+# vim: set ft=sh:
+
 {{if .Proxy -}}
 {{if .Proxy.HTTPProxy -}}
 export HTTP_PROXY="{{.Proxy.HTTPProxy}}"
